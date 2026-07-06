@@ -3,17 +3,17 @@
 // static CSS grid stays in the DOM for no-JS, reduced-motion, and touch
 // users — this module hides it only once it actually takes over.
 
-const GRID = 32;
+const GRID = 48;
 const LINE_COLOR = 'rgba(42, 54, 70, 0.22)';
 const LINE_WIDTH = 1;
 const DPR_CAP = 2;
 
-const R = 260; // influence radius
-const MAX_PULL = 22; // < GRID, so adjacent lines can never cross
-const CORE_SOFT = 56; // softening length for the 1/r² core
+const R = 280; // influence radius
+const MAX_PULL = 30; // < GRID, so adjacent lines can never cross
+const CORE_SOFT = 64; // softening length for the 1/r² core
 const STEP = 8; // vertex sampling inside the influence band
 
-const GLOW_R = 70;
+const GLOW_R = 88;
 const LERP = 0.12; // trailing factor per 60fps frame
 const SETTLE = 0.08; // distance (px) considered "at rest"
 
