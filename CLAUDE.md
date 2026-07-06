@@ -26,4 +26,4 @@ Public repo: employers will read this code. The full quality bar applies (see bo
 ## Agents that write content here
 
 - `/log-dev` registers git-branch activity into `resources/content/log/`. **Private projects (PcHome) are never registered without explicit approval.**
-- `/doc-dev` writes/updates tutorial pages in `resources/content/docs/` — it must fetch the official Laravel/Livewire docs before writing.
+- `/doc-dev` writes/updates project documentation pages in `resources/content/docs/` — reference material for Feras (how his projects are built and how to work on them), accuracy grounded by fetching the official Laravel/Livewire docs before writing. The DOC section is a reference, not a learning apparatus — never publish anything about Learning Pulse or other self-assessment there.

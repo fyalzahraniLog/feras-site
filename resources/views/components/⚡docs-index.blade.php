@@ -27,7 +27,7 @@ new #[Title('DOC — Feras')] class extends Component
 <div class="space-y-10">
     <header class="space-y-3">
         <x-section-heading prefix="//">doc</x-section-heading>
-        <p class="text-ink-400">A learning hub for the Laravel and Livewire concepts this site is built with — every example is the site's own code — plus notes on the site itself.</p>
+        <p class="text-ink-400">Documentation for my projects — how they're built and how to work on them, kept easy to come back to.</p>
     </header>
 
     <div class="relative">
