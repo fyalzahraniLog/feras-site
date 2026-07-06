@@ -11,6 +11,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
 use League\CommonMark\Extension\FrontMatter\Output\RenderedContentWithFrontMatter;
 use League\CommonMark\Extension\GithubFlavoredMarkdownExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
 use League\CommonMark\MarkdownConverter;
 
 /**
@@ -24,12 +25,25 @@ class ContentRepository
     /** @var array<string, Collection> parsed files per directory, memoized for the request */
     protected array $parsed = [];
 
+    /** Fixed sidebar/index group order; unknown categories sort last. */
+    public const CATEGORY_ORDER = ['laravel', 'livewire', 'site'];
+
     public function __construct()
     {
-        $environment = new Environment();
+        $environment = new Environment([
+            // ids on h2/h3 for the "On this page" TOC — no visible anchor element.
+            'heading_permalink' => [
+                'insert' => 'none',
+                'apply_id_to_heading' => true,
+                'id_prefix' => '',
+                'min_heading_level' => 2,
+                'max_heading_level' => 3,
+            ],
+        ]);
         $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new GithubFlavoredMarkdownExtension());
         $environment->addExtension(new FrontMatterExtension());
+        $environment->addExtension(new HeadingPermalinkExtension());
 
         $this->converter = new MarkdownConverter($environment);
     }
@@ -68,6 +82,21 @@ class ContentRepository
     public function doc(string $slug): ?array
     {
         return $this->docs()->firstWhere('slug', $slug);
+    }
+
+    /**
+     * Group docs by category in the fixed CATEGORY_ORDER.
+     * Pass a pre-filtered collection (e.g. search results) or nothing for all docs.
+     */
+    public function groupDocs(?Collection $docs = null): Collection
+    {
+        return ($docs ?? $this->docs())
+            ->groupBy('category')
+            ->sortBy(function (Collection $group, string $category) {
+                $index = array_search($category, self::CATEGORY_ORDER, true);
+
+                return $index === false ? PHP_INT_MAX : $index;
+            });
     }
 
     protected function parseDirectory(string $path): Collection
@@ -142,8 +171,23 @@ class ContentRepository
             'category' => $matter['category'] ?? 'General',
             'order' => $matter['order'] ?? 999,
             'excerpt' => $matter['excerpt'] ?? Str::limit($plain, 160),
-            'updated' => isset($matter['updated']) ? Carbon::parse($matter['updated']) : $entry['modified'],
+            'updated' => $this->parseDate($matter['updated'] ?? null) ?? $entry['modified'],
+            'headings' => $this->extractHeadings($entry['html']),
             'html' => $entry['html'],
         ];
+    }
+
+    /**
+     * @return list<array{level: int, id: string, text: string}> h2/h3 anchors for the "On this page" TOC
+     */
+    protected function extractHeadings(string $html): array
+    {
+        preg_match_all('/<h([23])[^>]*\bid="([^"]+)"[^>]*>(.*?)<\/h\1>/s', $html, $matches, PREG_SET_ORDER);
+
+        return array_map(fn (array $m) => [
+            'level' => (int) $m[1],
+            'id' => $m[2],
+            'text' => trim(html_entity_decode(strip_tags($m[3]))),
+        ], $matches);
     }
 }

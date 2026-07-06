@@ -1,7 +1,7 @@
 ---
 title: Site Architecture
-category: Project
-order: 1
+category: site
+order: 3
 excerpt: How this site is put together — Laravel, Livewire single-file components, and a flat-file content store.
 ---
 

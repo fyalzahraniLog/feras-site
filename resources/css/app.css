@@ -26,6 +26,11 @@
 }
 
 @layer base {
+    /* Anchored headings land below the sticky 56px header */
+    .prose :is(h2, h3) {
+        scroll-margin-top: 5rem;
+    }
+
     ::selection {
         background-color: color-mix(in srgb, var(--color-emerald-400) 30%, transparent);
         color: var(--color-ink-50);

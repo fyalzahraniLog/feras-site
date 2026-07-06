@@ -1,6 +1,6 @@
 ---
 title: Writing Content
-category: General
+category: site
 order: 2
 excerpt: The workflow for adding dev-log posts and doc pages — front matter, file naming, and conventions.
 ---

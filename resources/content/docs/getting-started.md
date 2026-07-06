@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-category: General
+category: site
 order: 1
 excerpt: What the DOC section is for and how it's organized.
 ---
@@ -14,7 +14,7 @@ Each page is a Markdown file with front matter:
 ```yaml
 ---
 title: Getting Started
-category: General
+category: site
 order: 1
 excerpt: One-line summary shown in lists.
 ---

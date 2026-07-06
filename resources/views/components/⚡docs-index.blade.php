@@ -13,11 +13,13 @@ new #[Title('DOC — Feras')] class extends Component
     {
         $search = trim($this->search);
 
-        return app(\App\Content\ContentRepository::class)->docs()
-            ->filter(fn (array $doc) => $search === ''
+        $repository = app(\App\Content\ContentRepository::class);
+
+        return $repository->groupDocs(
+            $repository->docs()->filter(fn (array $doc) => $search === ''
                 || stripos($doc['title'], $search) !== false
                 || stripos($doc['excerpt'], $search) !== false)
-            ->groupBy('category');
+        );
     }
 };
 ?>
@@ -25,7 +27,7 @@ new #[Title('DOC — Feras')] class extends Component
 <div class="space-y-10">
     <header class="space-y-3">
         <x-section-heading prefix="//">doc</x-section-heading>
-        <p class="text-ink-400">Reference pages that outlive a single log post — setup notes, project internals, and how this site works.</p>
+        <p class="text-ink-400">A learning hub for the Laravel and Livewire concepts this site is built with — every example is the site's own code — plus notes on the site itself.</p>
     </header>
 
     <div class="relative">
