@@ -1,0 +1,11 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "feras-site",
+            "runtimeExecutable": "/Users/feras/.config/herd-lite/bin/php",
+            "runtimeArgs": ["artisan", "serve", "--port=8080"],
+            "port": 8080
+        }
+    ]
+}

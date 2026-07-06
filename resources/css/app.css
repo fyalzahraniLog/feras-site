@@ -1,9 +1,44 @@
 @import 'tailwindcss';
 
+@plugin '@tailwindcss/typography';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+    /* "ink" — the dark blue-black scale the whole site is built on */
+    --color-ink-50: #f1f5f9;
+    --color-ink-100: #e2e8f0;
+    --color-ink-200: #cbd5e1;
+    --color-ink-300: #a7b3c4;
+    --color-ink-400: #8b98a9;
+    --color-ink-500: #64748b;
+    --color-ink-600: #475569;
+    --color-ink-700: #2a3646;
+    --color-ink-800: #1c2430;
+    --color-ink-850: #151b25;
+    --color-ink-900: #10151d;
+    --color-ink-950: #0a0d12;
+}
+
+@layer base {
+    ::selection {
+        background-color: color-mix(in srgb, var(--color-emerald-400) 30%, transparent);
+        color: var(--color-ink-50);
+    }
+}
+
+@layer components {
+    /* Faint blueprint grid behind the page, fading out toward the bottom */
+    .bg-grid-overlay {
+        background-image:
+            linear-gradient(to right, rgba(42, 54, 70, 0.22) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(42, 54, 70, 0.22) 1px, transparent 1px);
+        background-size: 32px 32px;
+        mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 25%, transparent 75%);
+    }
 }
