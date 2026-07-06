@@ -4,7 +4,7 @@ use Livewire\Component;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 
-new #[Title('Feras — Software Developer')] class extends Component
+new #[Title('Feras Alzahrani — Full-Stack Developer')] class extends Component
 {
     #[Computed]
     public function posts()
@@ -40,12 +40,11 @@ new #[Title('Feras — Software Developer')] class extends Component
                 <p class="text-ink-400">
                     <span class="text-emerald-400">$</span> whoami
                 </p>
-                {{-- TODO: real CV data --}}
-                <h1 class="text-2xl font-bold text-ink-100 sm:text-4xl">Feras</h1>
-                <p class="text-lg text-emerald-400 sm:text-xl">Software Developer</p>
+                <h1 class="text-2xl font-bold text-ink-100 sm:text-4xl">Feras Alzahrani</h1>
+                <p class="text-lg text-emerald-400 sm:text-xl">Full-Stack Developer</p>
                 <p class="max-w-2xl text-ink-300">
-                    {{-- TODO: real CV data --}}
-                    Building pragmatic web software — clean backends, fast interfaces, and tooling that stays out of the way.
+                    Computer Science graduate building clean, scalable, user-focused web apps
+                    with the RILT stack &mdash; React, Inertia, Laravel, Tailwind.
                 </p>
                 <p class="pt-2 text-ink-400">
                     <span class="text-emerald-400">$</span> <span class="inline-block h-4 w-2.5 translate-y-0.5 animate-pulse bg-emerald-400" aria-hidden="true"></span>
@@ -55,8 +54,12 @@ new #[Title('Feras — Software Developer')] class extends Component
 
         {{-- CTA buttons --}}
         <div class="mt-6 flex flex-wrap items-center gap-4">
-            <a href="{{ route('log.index') }}"
+            <a href="#projects"
                class="inline-flex items-center gap-2 rounded-lg bg-emerald-400 px-5 py-2.5 font-mono text-sm font-semibold text-ink-950 transition-colors hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-400/40">
+                ./projects
+            </a>
+            <a href="{{ route('log.index') }}"
+               class="inline-flex items-center gap-2 rounded-lg border border-ink-700 px-5 py-2.5 font-mono text-sm font-semibold text-ink-200 transition-colors hover:border-emerald-400/60 hover:text-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-400/40">
                 ./log-dev
             </a>
             <a href="{{ route('docs.index') }}"
@@ -75,20 +78,22 @@ new #[Title('Feras — Software Developer')] class extends Component
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {{-- Bio --}}
             <div class="space-y-4 text-ink-300 lg:col-span-2">
-                {{-- TODO: real CV data --}}
                 <p>
-                    I'm a software developer who enjoys the whole stack — from modelling data and shaping
-                    APIs to polishing the last pixel of a UI. Most of my day-to-day work happens in the
-                    PHP and JavaScript ecosystems, with a soft spot for Laravel and its tooling.
+                    I'm a Computer Science graduate from Umm Al-Qura University and a full-stack
+                    developer working with the RILT stack &mdash; React, Inertia, Laravel, and
+                    Tailwind CSS.
                 </p>
                 <p>
-                    I care about boring reliability: readable code, sensible tests, and deployments that
-                    don't require a war room. When something breaks, I'd rather fix the process than just
-                    the bug.
+                    I've built production-ready web apps with full CRUD, authentication, and
+                    responsive UIs &mdash; from task-management platforms deployed on Laravel Cloud
+                    to a React SPA with ~50 reusable components. A background in UI/UX research
+                    means I care as much about the user flow as about the code behind it.
                 </p>
                 <p>
-                    Away from the editor I write short dev-log posts about things I've learned, keep a set
-                    of living docs for my own setup, and tinker with home-lab experiments.
+                    Currently I work as an IT Network Technician with Harf Information Technology
+                    and co-develop the front-end of PcHome, a browser mini-games platform. I'm
+                    looking for a full-stack developer role building clean, scalable, user-focused
+                    web applications.
                 </p>
             </div>
 
@@ -96,23 +101,26 @@ new #[Title('Feras — Software Developer')] class extends Component
             <div class="rounded-lg border border-ink-800 bg-ink-900 p-5">
                 <p class="mb-4 font-mono text-xs text-ink-500">$ cat facts.yml</p>
                 <dl class="space-y-3 font-mono text-sm">
-                    {{-- TODO: real CV data --}}
                     <div class="flex justify-between gap-4">
                         <dt class="text-ink-500">location:</dt>
-                        <dd class="text-right text-ink-200">Somewhere, Earth</dd>
+                        <dd class="text-right text-ink-200">Saudi Arabia</dd>
                     </div>
                     <div class="flex justify-between gap-4">
                         <dt class="text-ink-500">focus:</dt>
-                        <dd class="text-right text-ink-200">full-stack web</dd>
+                        <dd class="text-right text-ink-200">full-stack (RILT)</dd>
                     </div>
                     <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">currently:</dt>
-                        <dd class="text-right text-ink-200">building things</dd>
+                        <dt class="text-ink-500">degree:</dt>
+                        <dd class="text-right text-ink-200">B.Sc. CS &mdash; UQU</dd>
+                    </div>
+                    <div class="flex justify-between gap-4">
+                        <dt class="text-ink-500">languages:</dt>
+                        <dd class="text-right text-ink-200">ar (native) / en</dd>
                     </div>
                     <div class="flex justify-between gap-4">
                         <dt class="text-ink-500">email:</dt>
                         <dd class="text-right">
-                            <a href="mailto:hello@example.com" class="text-cyan-300 hover:underline">hello@example.com</a>
+                            <a href="mailto:Fyalzahrani@hotmail.com" class="text-cyan-300 hover:underline">Fyalzahrani@hotmail.com</a>
                         </dd>
                     </div>
                 </dl>
@@ -121,45 +129,148 @@ new #[Title('Feras — Software Developer')] class extends Component
     </section>
 
     {{-- ============================================================ --}}
-    {{-- 3. SKILLS --}}
+    {{-- 3. PROJECTS --}}
     {{-- ============================================================ --}}
-    <section class="space-y-8">
-        <x-section-heading prefix="//">skills</x-section-heading>
+    <section id="projects" class="space-y-8">
+        <x-section-heading prefix="//">projects</x-section-heading>
 
-        {{-- TODO: real CV data --}}
-        <div class="space-y-6">
-            <div class="space-y-3">
-                <h3 class="font-mono text-sm text-ink-500"># Languages</h3>
-                <div class="flex flex-wrap gap-2">
-                    <x-tag>php</x-tag>
-                    <x-tag>typescript</x-tag>
-                    <x-tag>javascript</x-tag>
-                    <x-tag>sql</x-tag>
-                    <x-tag>bash</x-tag>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+            {{-- PcHome --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">PcHome</h3>
+                    <span class="rounded border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 font-mono text-xs text-emerald-300">in progress</span>
                 </div>
-            </div>
-            <div class="space-y-3">
-                <h3 class="font-mono text-sm text-ink-500"># Frameworks &amp; Tools</h3>
-                <div class="flex flex-wrap gap-2">
+                <p class="mt-1 font-mono text-xs text-emerald-400">co-developer (front-end)</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    Web platform hosting browser-based mini-games. Co-developing the front-end
+                    with reusable UI components on the RILT stack.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>react</x-tag>
+                    <x-tag>inertia</x-tag>
                     <x-tag>laravel</x-tag>
-                    <x-tag>livewire</x-tag>
-                    <x-tag>vue</x-tag>
-                    <x-tag>tailwindcss</x-tag>
+                    <x-tag>tailwind</x-tag>
+                </div>
+            </div>
+
+            {{-- Laravel RILT Stack --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">Laravel RILT Stack</h3>
+                    <span class="font-mono text-xs text-ink-500">2026-03</span>
+                </div>
+                <p class="mt-1 font-mono text-xs text-emerald-400">personal project</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    Task &amp; media management app: React/Inertia front-end in TypeScript, 4 Eloquent
+                    models with a many-to-many pivot, Fortify auth with 2FA and a full account
+                    settings area, and multi-image upload via Spatie Media Library with responsive
+                    conversions and paginated CRUD.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>typescript</x-tag>
+                    <x-tag>react</x-tag>
+                    <x-tag>laravel</x-tag>
+                    <x-tag>fortify</x-tag>
+                    <x-tag>spatie</x-tag>
+                </div>
+                <div class="mt-4 flex gap-4 font-mono text-xs">
+                    <a href="https://github.com/fyalzahraniLog/laravel-RILTstack" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[github]</a>
+                    <a href="https://laravel-riltstack-master-ngq7l5.laravel.cloud/" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[live demo]</a>
+                </div>
+            </div>
+
+            {{-- employTask (Tuwaiq Academy) --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">employTask</h3>
+                    <span class="font-mono text-xs text-ink-500">2025-04 &rarr; 2025-05</span>
+                </div>
+                <p class="mt-1 font-mono text-xs text-emerald-400">Tuwaiq Academy &mdash; Laravel bootcamp</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    Full-stack task-management app deployed to Laravel Cloud: relational schema
+                    (users, groups, tasks) where tasks belong to groups and are assigned to users,
+                    complete CRUD, Breeze authentication, and a responsive Tailwind UI.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>laravel</x-tag>
+                    <x-tag>breeze</x-tag>
+                    <x-tag>tailwind</x-tag>
                     <x-tag>mysql</x-tag>
-                    <x-tag>redis</x-tag>
-                    <x-tag>docker</x-tag>
+                </div>
+                <div class="mt-4 flex gap-4 font-mono text-xs">
+                    <a href="https://github.com/fyalzahraniLog/employTask" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[github]</a>
+                    <a href="https://employtask-main-fukehc.laravel.cloud/" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[live demo]</a>
                 </div>
             </div>
-            <div class="space-y-3">
-                <h3 class="font-mono text-sm text-ink-500"># Practices</h3>
-                <div class="flex flex-wrap gap-2">
-                    <x-tag>tdd</x-tag>
-                    <x-tag>ci/cd</x-tag>
-                    <x-tag>code review</x-tag>
-                    <x-tag>api design</x-tag>
-                    <x-tag>observability</x-tag>
+
+            {{-- Project React --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">Project React</h3>
+                    <span class="font-mono text-xs text-ink-500">2025-02 &rarr; 2025-03</span>
+                </div>
+                <p class="mt-1 font-mono text-xs text-emerald-400">React single-page application</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    React SPA with ~50 reusable components and 8 custom hooks &mdash; effect-based
+                    data fetching, forms with authentication, state management, and performance
+                    optimization to minimize unnecessary re-renders.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>react</x-tag>
+                    <x-tag>hooks</x-tag>
+                    <x-tag>spa</x-tag>
+                </div>
+                <div class="mt-4 flex gap-4 font-mono text-xs">
+                    <a href="https://github.com/fyalzahraniLog/project-react-final-code" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[github]</a>
+                    <a href="https://project-react-final-code.vercel.app/" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[live demo]</a>
                 </div>
             </div>
+
+            {{-- ScoopCritic --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">ScoopCritic</h3>
+                    <span class="font-mono text-xs text-ink-500">2025-06</span>
+                </div>
+                <p class="mt-1 font-mono text-xs text-emerald-400">UI/UX designer &amp; user researcher</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    End-to-end design of a game-rating platform: user research on existing platforms
+                    to identify UX gaps, and high-fidelity Figma prototypes that streamline
+                    navigation across game listings, news, and release dates.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>figma</x-tag>
+                    <x-tag>ui/ux</x-tag>
+                    <x-tag>user research</x-tag>
+                </div>
+                <div class="mt-4 flex gap-4 font-mono text-xs">
+                    <a href="https://www.figma.com/proto/0UvxeniXKI5QemnagMRZ8b/portfolio?node-id=291-10617&t=mNGboqsedQ2TASnW-1" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[figma prototype]</a>
+                </div>
+            </div>
+
+            {{-- Graduation project --}}
+            <div class="flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                    <h3 class="font-mono text-base font-semibold text-ink-100">Front-End Website</h3>
+                    <span class="font-mono text-xs text-ink-500">2022-09 &rarr; 2023-03</span>
+                </div>
+                <p class="mt-1 font-mono text-xs text-emerald-400">university graduation project</p>
+                <p class="mt-3 flex-1 text-sm text-ink-300">
+                    Designed and developed the landing page for a scientific study in HTML and CSS,
+                    including wireframes and prototypes for user flow and usability.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <x-tag>html</x-tag>
+                    <x-tag>css</x-tag>
+                    <x-tag>wireframing</x-tag>
+                </div>
+                <div class="mt-4 flex gap-4 font-mono text-xs">
+                    <a href="https://www.figma.com/proto/ZpBvApGQghG7aDUxEWmKtq/Writtiner-Design?page-id=0%3A1&node-id=1-3&viewport=628%2C139%2C0.16&t=FsGglUvmRIXVAkNs-1&scaling=min-zoom&content-scaling=fixed" target="_blank" rel="noopener" class="text-cyan-300 transition-colors hover:text-cyan-200">[figma prototype]</a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -169,42 +280,115 @@ new #[Title('Feras — Software Developer')] class extends Component
     <section class="space-y-8">
         <x-section-heading prefix="//">experience</x-section-heading>
 
-        {{-- TODO: real CV data --}}
         <ol class="space-y-10 border-l border-ink-800 pl-6">
             <li class="relative">
                 <span class="absolute -left-[1.85rem] top-1.5 h-3 w-3 rounded-full border-2 border-ink-950 bg-emerald-400"></span>
-                <p class="font-mono text-xs text-ink-500">2023 — now</p>
-                <h3 class="mt-1 text-lg font-semibold text-ink-100">Senior Software Developer</h3>
-                <p class="font-mono text-sm text-ink-400">Acme Web Studio</p>
+                <p class="font-mono text-xs text-ink-500">2026-01 — now</p>
+                <h3 class="mt-1 text-lg font-semibold text-ink-100">IT Network Technician</h3>
+                <p class="font-mono text-sm text-ink-400">Harf Information Technology &mdash; College of IT, Umm Al-Qura University</p>
                 <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-300">
-                    <li>Leading development of a multi-tenant SaaS platform on Laravel and Livewire.</li>
-                    <li>Cut CI pipeline time in half and introduced automated release checklists.</li>
-                </ul>
-            </li>
-            <li class="relative">
-                <span class="absolute -left-[1.85rem] top-1.5 h-3 w-3 rounded-full border-2 border-ink-950 bg-emerald-400"></span>
-                <p class="font-mono text-xs text-ink-500">2020 — 2023</p>
-                <h3 class="mt-1 text-lg font-semibold text-ink-100">Software Developer</h3>
-                <p class="font-mono text-sm text-ink-400">Placeholder Systems GmbH</p>
-                <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-300">
-                    <li>Built and maintained internal APIs serving several customer-facing products.</li>
-                    <li>Migrated a legacy monolith to a modular, test-covered codebase.</li>
-                </ul>
-            </li>
-            <li class="relative">
-                <span class="absolute -left-[1.85rem] top-1.5 h-3 w-3 rounded-full border-2 border-ink-950 bg-emerald-400"></span>
-                <p class="font-mono text-xs text-ink-500">2018 — 2020</p>
-                <h3 class="mt-1 text-lg font-semibold text-ink-100">Junior Developer</h3>
-                <p class="font-mono text-sm text-ink-400">Example Agency</p>
-                <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-ink-300">
-                    <li>Shipped client websites and small web apps across a range of stacks.</li>
+                    <li>Extend LAN cabling from network points to switches, connecting 2&ndash;4 devices per request to expand reliable network coverage across the college.</li>
+                    <li>Resolve 5&ndash;7 help-desk tickets per week, troubleshooting hardware, software, and network connectivity issues for staff and students.</li>
                 </ul>
             </li>
         </ol>
     </section>
 
     {{-- ============================================================ --}}
-    {{-- 5. LATEST FROM THE LOG --}}
+    {{-- 5. EDUCATION & COURSES --}}
+    {{-- ============================================================ --}}
+    <section class="space-y-8">
+        <x-section-heading prefix="//">education</x-section-heading>
+
+        <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <p class="font-mono text-xs text-ink-500">2019 &rarr; 2025</p>
+                <h3 class="mt-1 text-lg font-semibold text-ink-100">B.Sc. Computer Science</h3>
+                <p class="font-mono text-sm text-ink-400">Umm Al-Qura University</p>
+            </div>
+
+            <div class="rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <p class="mb-3 font-mono text-xs text-ink-500"># Courses &amp; certifications &mdash; Udemy, 2022&ndash;2024</p>
+                <ul class="space-y-1.5 font-mono text-sm text-ink-300">
+                    <li><span class="text-emerald-400">-</span> Complete Web &amp; Mobile Designer: UI/UX, Figma</li>
+                    <li><span class="text-emerald-400">-</span> Advanced CSS &amp; SASS: Flexbox, Grid, Animations</li>
+                    <li><span class="text-emerald-400">-</span> The Git &amp; GitHub Bootcamp</li>
+                    <li><span class="text-emerald-400">-</span> The Web Developer Bootcamp 2024</li>
+                    <li><span class="text-emerald-400">-</span> Clean Code</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    {{-- ============================================================ --}}
+    {{-- 6. SKILLS --}}
+    {{-- ============================================================ --}}
+    <section class="space-y-8">
+        <x-section-heading prefix="//">skills</x-section-heading>
+
+        <div class="space-y-6">
+            <div class="space-y-3">
+                <h3 class="font-mono text-sm text-ink-500"># Languages</h3>
+                <div class="flex flex-wrap gap-2">
+                    <x-tag>html5</x-tag>
+                    <x-tag>css3</x-tag>
+                    <x-tag>javascript (es6)</x-tag>
+                    <x-tag>typescript</x-tag>
+                    <x-tag>php</x-tag>
+                    <x-tag>sql (mysql)</x-tag>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-mono text-sm text-ink-500"># Frameworks &amp; Libraries</h3>
+                <div class="flex flex-wrap gap-2">
+                    <x-tag>react.js</x-tag>
+                    <x-tag>laravel</x-tag>
+                    <x-tag>inertia.js</x-tag>
+                    <x-tag>tailwind css</x-tag>
+                    <x-tag>shadcn/ui</x-tag>
+                    <x-tag>eloquent orm</x-tag>
+                    <x-tag>laravel breeze</x-tag>
+                    <x-tag>laravel fortify</x-tag>
+                    <x-tag>spatie media library</x-tag>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-mono text-sm text-ink-500"># Concepts</h3>
+                <div class="flex flex-wrap gap-2">
+                    <x-tag>rest apis</x-tag>
+                    <x-tag>crud</x-tag>
+                    <x-tag>authentication</x-tag>
+                    <x-tag>responsive design</x-tag>
+                    <x-tag>component-based architecture</x-tag>
+                    <x-tag>state management</x-tag>
+                    <x-tag>spa</x-tag>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-mono text-sm text-ink-500"># Design &amp; Research</h3>
+                <div class="flex flex-wrap gap-2">
+                    <x-tag>figma</x-tag>
+                    <x-tag>prototyping</x-tag>
+                    <x-tag>wireframing</x-tag>
+                    <x-tag>ui/ux</x-tag>
+                    <x-tag>user research</x-tag>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-mono text-sm text-ink-500"># Tools</h3>
+                <div class="flex flex-wrap gap-2">
+                    <x-tag>git</x-tag>
+                    <x-tag>github</x-tag>
+                    <x-tag>laravel cloud</x-tag>
+                    <x-tag>vs code</x-tag>
+                    <x-tag>ai coding tools (claude code, codex, gemini)</x-tag>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- ============================================================ --}}
+    {{-- 7. LATEST FROM THE LOG --}}
     {{-- ============================================================ --}}
     <section class="space-y-8">
         <div class="flex items-baseline justify-between gap-4">
@@ -239,7 +423,7 @@ new #[Title('Feras — Software Developer')] class extends Component
     </section>
 
     {{-- ============================================================ --}}
-    {{-- 6. DOC --}}
+    {{-- 8. DOC --}}
     {{-- ============================================================ --}}
     <section class="space-y-8">
         <div class="flex items-baseline justify-between gap-4">
@@ -265,22 +449,21 @@ new #[Title('Feras — Software Developer')] class extends Component
     </section>
 
     {{-- ============================================================ --}}
-    {{-- 7. CONTACT --}}
+    {{-- 9. CONTACT --}}
     {{-- ============================================================ --}}
     <section class="rounded-lg border border-ink-800 bg-ink-900 px-6 py-12 text-center">
         <p class="font-mono text-sm text-ink-400">
             <span class="text-emerald-400">$</span> echo 'get in touch'
         </p>
-        {{-- TODO: real CV data --}}
-        <a href="mailto:hello@example.com"
+        <a href="mailto:Fyalzahrani@hotmail.com"
            class="mt-4 inline-block font-mono text-lg text-cyan-300 transition-colors hover:text-cyan-200 sm:text-xl">
-            hello@example.com
+            Fyalzahrani@hotmail.com
         </a>
+        <p class="mt-2 font-mono text-sm text-ink-400">[removed]</p>
         <div class="mt-6 flex items-center justify-center gap-6 font-mono text-sm">
-            {{-- TODO: real GitHub / LinkedIn URLs --}}
-            <a href="#" class="text-ink-400 transition-colors hover:text-emerald-400">github</a>
+            <a href="https://github.com/fyalzahraniLog" target="_blank" rel="noopener" class="text-ink-400 transition-colors hover:text-emerald-400">github</a>
             <span class="text-ink-700">/</span>
-            <a href="#" class="text-ink-400 transition-colors hover:text-emerald-400">linkedin</a>
+            <a href="https://www.linkedin.com/in/feras-al-zahrani-04743a2a4" target="_blank" rel="noopener" class="text-ink-400 transition-colors hover:text-emerald-400">linkedin</a>
         </div>
     </section>
 
