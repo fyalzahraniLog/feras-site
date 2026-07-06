@@ -44,6 +44,9 @@ function createInstance(canvas) {
     const ctx = canvas.getContext('2d');
     const ac = new AbortController();
     const staticGrid = document.querySelector('[data-grid-static]');
+    // Layout sets 1 on the landing page, smaller elsewhere so the ball
+    // stays subtle behind content-heavy pages.
+    const ballR = GLOW_R * (parseFloat(canvas.dataset.ballScale) || 1);
 
     let w = 0;
     let h = 0;
@@ -145,7 +148,7 @@ function createInstance(canvas) {
         ctx.restore();
 
         // Event horizon: black core → penumbra into the page bg → emerald rim → glow.
-        const g = ctx.createRadialGradient(ball.x, ball.y, 0, ball.x, ball.y, GLOW_R);
+        const g = ctx.createRadialGradient(ball.x, ball.y, 0, ball.x, ball.y, ballR);
         g.addColorStop(0, 'rgba(0, 0, 0, 1)');
         g.addColorStop(0.2, 'rgba(0, 0, 0, 1)');
         g.addColorStop(0.245, 'rgba(10, 13, 18, 1)');
@@ -154,7 +157,7 @@ function createInstance(canvas) {
         g.addColorStop(1, 'rgba(52, 211, 153, 0)');
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(ball.x, ball.y, GLOW_R, 0, Math.PI * 2);
+        ctx.arc(ball.x, ball.y, ballR, 0, Math.PI * 2);
         ctx.fill();
     }
 

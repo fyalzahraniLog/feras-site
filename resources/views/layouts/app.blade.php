@@ -14,7 +14,7 @@
     <body class="flex min-h-screen flex-col bg-ink-950 font-sans text-ink-200 antialiased">
         <div class="bg-grid-overlay pointer-events-none fixed inset-0" aria-hidden="true" data-grid-static></div>
 
-        <canvas id="blackhole-canvas" class="pointer-events-none fixed inset-0 h-full w-full" aria-hidden="true"></canvas>
+        <canvas id="blackhole-canvas" class="pointer-events-none fixed inset-0 h-full w-full" aria-hidden="true" data-ball-scale="{{ request()->routeIs('home') ? '1' : '0.6' }}"></canvas>
 
         <header class="sticky top-0 z-40 border-b border-ink-800/80 bg-ink-950/85 backdrop-blur-sm">
             <nav class="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4 sm:px-6">
