@@ -59,6 +59,10 @@ new class extends Component
             <time datetime="{{ $this->post['date']->format('Y-m-d') }}">{{ $this->post['date']->format('Y-m-d') }}</time>
             <span aria-hidden="true">·</span>
             <span>{{ $this->post['readingTime'] }} min read</span>
+            @if ($this->post['type'] === 'activity')
+                <span aria-hidden="true">·</span>
+                <x-branch-badge :project="$this->post['project']" :branch="$this->post['branch']" :repo="$this->post['repo']" />
+            @endif
             @if (! empty($this->post['tags']))
                 <span aria-hidden="true">·</span>
                 <span class="flex flex-wrap gap-2">

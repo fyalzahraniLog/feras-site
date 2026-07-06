@@ -106,13 +106,28 @@ class ContentRepository
 
         return [
             'slug' => $slug,
+            'type' => $matter['type'] ?? 'post',
+            'project' => $matter['project'] ?? null,
+            'branch' => $matter['branch'] ?? null,
+            'repo' => $matter['repo'] ?? null,
+            'commit' => $matter['commit'] ?? null,
             'title' => $matter['title'] ?? Str::headline($slug),
-            'date' => isset($matter['date']) ? Carbon::parse($matter['date']) : $entry['modified'],
+            'date' => $this->parseDate($matter['date'] ?? null) ?? $entry['modified'],
             'tags' => $matter['tags'] ?? [],
             'excerpt' => $matter['excerpt'] ?? Str::limit($plain, 160),
             'readingTime' => max(1, (int) ceil(str_word_count($plain) / 200)),
             'html' => $entry['html'],
         ];
+    }
+
+    /** symfony/yaml coerces unquoted YAML dates to int timestamps — accept both forms. */
+    protected function parseDate(mixed $value): ?Carbon
+    {
+        return match (true) {
+            $value === null => null,
+            is_int($value) => Carbon::createFromTimestampUTC($value),
+            default => Carbon::parse($value),
+        };
     }
 
     protected function hydrateDoc(array $entry): array

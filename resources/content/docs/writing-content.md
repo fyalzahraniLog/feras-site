@@ -25,6 +25,28 @@ task lists and fenced code blocks all work.
 
 Save that as `2026-07-04-shipping-the-search-box.md` and it appears at `/log/shipping-the-search-box`. Reading time is computed from the word count, so there's nothing to maintain.
 
+## Activity entries (Log Dev)
+
+The Log Dev feed also mixes in **activity entries** — GitHub-style contribution cards registered by the `/log-dev` agent after working on a project branch. The card shows the project and branch; the bullet details expand inline. An activity file adds a few front-matter fields:
+
+```markdown
+---
+type: activity
+title: "One-line summary of the branch work"
+date: "2026-07-06T14:32:10+03:00"
+project: PcHome
+branch: feature/checkout
+repo: https://github.com/user/repo
+commit: 4f9c2e1
+slug: 2026-07-06-pchome-feature-checkout
+tags: [pchome]
+---
+
+- Bullet points summarizing what was accomplished.
+```
+
+Three rules the agent follows (and you should too, if writing one by hand): quote the `date` (unquoted YAML datetimes become integer timestamps), keep the date prefix in the explicit `slug` (prevents collisions when the same branch is registered on different days), and record the HEAD `commit` — it's how the agent knows where the next summary should start.
+
 ## Doc pages
 
 Docs live in `resources/content/docs/` and are grouped rather than dated. Front matter drives the index:
