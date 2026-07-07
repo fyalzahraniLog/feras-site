@@ -4,6 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <script>
+            // Apply the saved color theme before first paint (no flash).
+            (function () { try { var t = localStorage.getItem('feras-theme'); if (t) { document.documentElement.dataset.theme = t; } } catch (e) {} })();
+        </script>
+
         <title>{{ $title ?? config('app.name') }}</title>
         <meta name="description" content="{{ $description ?? 'Feras Alzahrani — Full-Stack Developer (React, Inertia, Laravel, Tailwind). CV, projects, dev log, and documentation.' }}">
 
@@ -33,6 +38,42 @@
                 @endphp
 
                 <div class="flex items-center gap-0.5 font-mono text-xs sm:gap-1 sm:text-sm">
+                    {{-- Theme switcher: ink / ember / nebula --}}
+                    <div
+                        x-data="{
+                            themes: [
+                                { id: 'ink', color: '#34d399', label: 'ink — emerald on blue-black' },
+                                { id: 'ember', color: '#fbbf24', label: 'ember — amber on warm charcoal' },
+                                { id: 'nebula', color: '#f472b6', label: 'nebula — pink on deep purple' },
+                            ],
+                            current: document.documentElement.dataset.theme || 'ink',
+                            set(id) {
+                                this.current = id;
+                                try {
+                                    if (id === 'ink') { delete document.documentElement.dataset.theme; localStorage.removeItem('feras-theme'); }
+                                    else { document.documentElement.dataset.theme = id; localStorage.setItem('feras-theme', id); }
+                                } catch (e) {}
+                                window.__blackhole?.destroy(); window.__blackhole?.init();
+                            },
+                        }"
+                        class="mr-2 flex items-center gap-1.5"
+                        role="radiogroup"
+                        aria-label="Color theme"
+                    >
+                        <template x-for="t in themes" :key="t.id">
+                            <button
+                                type="button"
+                                role="radio"
+                                x-on:click="set(t.id)"
+                                :aria-label="t.label"
+                                :aria-checked="(current === t.id).toString()"
+                                :class="current === t.id ? 'scale-110 border-ink-100/70' : 'border-transparent opacity-60 hover:opacity-100'"
+                                :style="`background-color: ${t.color}`"
+                                class="h-3 w-3 rounded-full border transition hover:scale-125 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                            ></button>
+                        </template>
+                    </div>
+
                     <a href="{{ route('home') }}" class="{{ $navLink(request()->routeIs('home')) }}">./about</a>
                     <a href="{{ route('log.index') }}" class="{{ $navLink(request()->routeIs('log.*')) }}">./log-dev</a>
                     <a href="{{ route('docs.index') }}" class="{{ $navLink(request()->routeIs('docs.*')) }}">./doc</a>

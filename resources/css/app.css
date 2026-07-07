@@ -25,6 +25,64 @@
     --color-ink-950: #0a0d12;
 }
 
+/*
+ * Color themes. The site's Blade templates use ink/emerald/cyan utilities
+ * everywhere; Tailwind 4 resolves those to CSS variables, so a theme is just
+ * a re-mapping of the variables — "emerald" utilities render amber under
+ * [data-theme=ember] by design. --grid-line and --bh-accent (rgb triplet)
+ * feed the grid overlay and the black-hole canvas.
+ */
+:root {
+    --grid-line: rgba(42, 54, 70, 0.22);
+    --bh-accent: 52, 211, 153;
+}
+
+:root[data-theme='ember'] {
+    --color-ink-50: #faf3e0;
+    --color-ink-100: #f0e2c4;
+    --color-ink-200: #dbc9a8;
+    --color-ink-300: #c2ad8a;
+    --color-ink-400: #a5916f;
+    --color-ink-500: #8a775a;
+    --color-ink-600: #63523a;
+    --color-ink-700: #4a3b28;
+    --color-ink-800: #2e2519;
+    --color-ink-850: #211b14;
+    --color-ink-900: #1a1610;
+    --color-ink-950: #131009;
+    --color-emerald-300: #fcd34d;
+    --color-emerald-400: #fbbf24;
+    --color-emerald-500: #f59e0b;
+    --color-cyan-200: #fed7aa;
+    --color-cyan-300: #fdba74;
+    --grid-line: rgba(74, 59, 40, 0.28);
+    --bh-accent: 251, 191, 36;
+    --livewire-progress-bar-color: #fbbf24;
+}
+
+:root[data-theme='nebula'] {
+    --color-ink-50: #f5f0fb;
+    --color-ink-100: #e9e0f5;
+    --color-ink-200: #cfc2e3;
+    --color-ink-300: #b3a3cf;
+    --color-ink-400: #9583b8;
+    --color-ink-500: #7d68a4;
+    --color-ink-600: #584380;
+    --color-ink-700: #40305e;
+    --color-ink-800: #281d3d;
+    --color-ink-850: #1b1429;
+    --color-ink-900: #151021;
+    --color-ink-950: #0e0a16;
+    --color-emerald-300: #f9a8d4;
+    --color-emerald-400: #f472b6;
+    --color-emerald-500: #ec4899;
+    --color-cyan-200: #ddd6fe;
+    --color-cyan-300: #c4b5fd;
+    --grid-line: rgba(64, 48, 94, 0.3);
+    --bh-accent: 244, 114, 182;
+    --livewire-progress-bar-color: #f472b6;
+}
+
 @layer base {
     /* Alpine: hide x-cloak'd elements until Alpine initializes (coach steps, checkmarks) */
     [x-cloak] {
@@ -46,8 +104,8 @@
     /* Faint blueprint grid behind the page, fading out toward the bottom */
     .bg-grid-overlay {
         background-image:
-            linear-gradient(to right, rgba(42, 54, 70, 0.22) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(42, 54, 70, 0.22) 1px, transparent 1px);
+            linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+            linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
         background-size: 48px 48px;
         mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 25%, transparent 75%);
     }

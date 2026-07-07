@@ -4,7 +4,6 @@
 // users — this module hides it only once it actually takes over.
 
 const GRID = 48;
-const LINE_COLOR = 'rgba(42, 54, 70, 0.22)';
 const LINE_WIDTH = 1;
 const DPR_CAP = 2;
 
@@ -48,6 +47,13 @@ function createInstance(canvas) {
     // stays subtle behind content-heavy pages.
     const ballR = GLOW_R * (parseFloat(canvas.dataset.ballScale) || 1);
 
+    // Theme-aware colors, read once per instance; the theme switcher
+    // re-initializes the effect so a theme change picks up new values.
+    const styles = getComputedStyle(document.documentElement);
+    const lineColor = styles.getPropertyValue('--grid-line').trim() || 'rgba(42, 54, 70, 0.22)';
+    const accent = styles.getPropertyValue('--bh-accent').trim() || '52, 211, 153';
+    const pageBg = styles.getPropertyValue('--color-ink-950').trim() || '#0a0d12';
+
     let w = 0;
     let h = 0;
     let raf = 0;
@@ -90,7 +96,7 @@ function createInstance(canvas) {
     function draw() {
         ctx.clearRect(0, 0, w, h);
 
-        ctx.strokeStyle = LINE_COLOR;
+        ctx.strokeStyle = lineColor;
         ctx.lineWidth = LINE_WIDTH;
         ctx.beginPath();
 
@@ -151,10 +157,10 @@ function createInstance(canvas) {
         const g = ctx.createRadialGradient(ball.x, ball.y, 0, ball.x, ball.y, ballR);
         g.addColorStop(0, 'rgba(0, 0, 0, 1)');
         g.addColorStop(0.2, 'rgba(0, 0, 0, 1)');
-        g.addColorStop(0.245, 'rgba(10, 13, 18, 1)');
-        g.addColorStop(0.27, 'rgba(52, 211, 153, 0.5)');
-        g.addColorStop(0.36, 'rgba(52, 211, 153, 0.1)');
-        g.addColorStop(1, 'rgba(52, 211, 153, 0)');
+        g.addColorStop(0.245, pageBg);
+        g.addColorStop(0.27, `rgba(${accent}, 0.5)`);
+        g.addColorStop(0.36, `rgba(${accent}, 0.1)`);
+        g.addColorStop(1, `rgba(${accent}, 0)`);
         ctx.fillStyle = g;
         ctx.beginPath();
         ctx.arc(ball.x, ball.y, ballR, 0, Math.PI * 2);
