@@ -28,7 +28,7 @@
         <header class="sticky top-0 z-40 border-b border-ink-800/80 bg-ink-950/85 backdrop-blur-sm">
             <nav class="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4 sm:px-6">
                 <a href="{{ route('home') }}" class="font-mono text-xs sm:text-sm" aria-label="Home">
-                    <span class="text-emerald-400">feras</span><span class="text-ink-500">@dev</span><span class="text-ink-500">:~$</span><span class="ml-1 inline-block h-3.5 w-2 animate-pulse bg-emerald-400/80 align-middle" aria-hidden="true"></span>
+                    <span class="text-emerald-400">feras</span><span class="text-ink-500">@dev</span><span class="hidden sm:inline"><span class="text-ink-500">:~$</span><span class="ml-1 inline-block h-3.5 w-2 animate-pulse bg-emerald-400/80 align-middle" aria-hidden="true"></span></span>
                 </a>
 
                 @php
@@ -58,22 +58,36 @@
                                 window.__blackhole?.destroy(); window.__blackhole?.init();
                             },
                         }"
-                        class="mr-2 flex items-center gap-1 sm:gap-1.5"
-                        role="radiogroup"
-                        aria-label="Color theme"
+                        class="mr-1 flex items-center sm:mr-2"
                     >
-                        <template x-for="t in themes" :key="t.id">
-                            <button
-                                type="button"
-                                role="radio"
-                                x-on:click="set(t.id)"
-                                :aria-label="t.label"
-                                :aria-checked="(current === t.id).toString()"
-                                :class="current === t.id ? 'scale-110 border-ink-100/70' : 'border-transparent opacity-60 hover:opacity-100'"
-                                :style="`background-color: ${t.color}`"
-                                class="h-2.5 w-2.5 rounded-full border transition hover:scale-125 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 sm:h-3 sm:w-3"
-                            ></button>
-                        </template>
+                        {{-- Mobile: one dot showing the current theme — tap to cycle (real touch target) --}}
+                        <button
+                            type="button"
+                            class="-m-3 rounded-full p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 sm:hidden"
+                            x-on:click="set(themes[(themes.findIndex(t => t.id === current) + 1) % themes.length].id)"
+                            :aria-label="`color theme: ${current} — tap for next`"
+                        >
+                            <span
+                                class="block h-3.5 w-3.5 rounded-full border border-ink-100/50"
+                                :style="`background-color: ${themes.find(t => t.id === current)?.color}`"
+                            ></span>
+                        </button>
+
+                        {{-- sm and up: the full five-dot radiogroup --}}
+                        <div class="hidden items-center gap-1.5 sm:flex" role="radiogroup" aria-label="Color theme">
+                            <template x-for="t in themes" :key="t.id">
+                                <button
+                                    type="button"
+                                    role="radio"
+                                    x-on:click="set(t.id)"
+                                    :aria-label="t.label"
+                                    :aria-checked="(current === t.id).toString()"
+                                    :class="current === t.id ? 'scale-110 border-ink-100/70' : 'border-transparent opacity-60 hover:opacity-100'"
+                                    :style="`background-color: ${t.color}`"
+                                    class="h-3 w-3 rounded-full border transition hover:scale-125 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                                ></button>
+                            </template>
+                        </div>
                     </div>
 
                     <a href="{{ route('home') }}" class="{{ $navLink(request()->routeIs('home')) }}">./about</a>
