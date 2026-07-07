@@ -136,6 +136,25 @@ new #[Title('Log Dev — Feras')] class extends Component
         </div>
     </div>
 
+    {{-- Skeleton cards while a search/filter roundtrip is in flight (.delay avoids flicker on fast responses) --}}
+    <div wire:loading.delay class="space-y-4" aria-hidden="true">
+        @foreach (range(1, 3) as $i)
+            <div class="animate-pulse rounded-lg border border-ink-800 bg-ink-900 p-5">
+                <div class="flex gap-6">
+                    <div class="h-3 w-20 rounded bg-ink-800"></div>
+                    <div class="h-3 w-16 rounded bg-ink-850"></div>
+                </div>
+                <div class="mt-3 h-5 w-2/3 rounded bg-ink-800"></div>
+                <div class="mt-3 h-3 w-full rounded bg-ink-850"></div>
+                <div class="mt-4 flex gap-2">
+                    <div class="h-5 w-14 rounded bg-ink-850"></div>
+                    <div class="h-5 w-14 rounded bg-ink-850"></div>
+                </div>
+            </div>
+        @endforeach
+    </div>
+
+    <div wire:loading.remove.delay>
     @if ($this->posts->isEmpty())
         <div class="rounded-lg border border-ink-800 bg-ink-900 p-6 text-center">
             @php
@@ -205,4 +224,5 @@ new #[Title('Log Dev — Feras')] class extends Component
             @endforeach
         </ul>
     @endif
+    </div>
 </div>

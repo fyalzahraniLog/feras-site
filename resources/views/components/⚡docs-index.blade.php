@@ -41,6 +41,22 @@ new #[Title('DOC — Feras')] class extends Component
         />
     </div>
 
+    {{-- Skeleton cards while a search roundtrip is in flight (.delay avoids flicker on fast responses) --}}
+    <div wire:loading.delay class="space-y-4" aria-hidden="true">
+        <div class="h-3 w-24 animate-pulse rounded bg-ink-800"></div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            @foreach (range(1, 4) as $i)
+                <div class="animate-pulse rounded-lg border border-ink-800 bg-ink-900 p-5">
+                    <div class="h-4 w-1/2 rounded bg-ink-800"></div>
+                    <div class="mt-3 h-3 w-full rounded bg-ink-850"></div>
+                    <div class="mt-2 h-3 w-3/4 rounded bg-ink-850"></div>
+                    <div class="mt-4 h-3 w-24 rounded bg-ink-850"></div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div wire:loading.remove.delay>
     @if ($this->groups->isEmpty())
         <div class="rounded-lg border border-ink-800 bg-ink-900 p-8 text-center font-mono text-sm">
             <p class="text-ink-300">$ grep -ri "{{ $search }}" ./docs</p>
@@ -83,4 +99,5 @@ new #[Title('DOC — Feras')] class extends Component
             @endforeach
         </div>
     @endif
+    </div>
 </div>
