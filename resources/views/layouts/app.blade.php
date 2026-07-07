@@ -63,7 +63,7 @@
                         {{-- Mobile: one dot showing the current theme — tap to cycle (real touch target) --}}
                         <button
                             type="button"
-                            class="-m-3 rounded-full p-3 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 sm:hidden"
+                            class="-my-3 -ml-3 flex items-center gap-1.5 rounded-full py-3 pl-3 pr-1 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 sm:hidden"
                             x-on:click="set(themes[(themes.findIndex(t => t.id === current) + 1) % themes.length].id)"
                             :aria-label="`color theme: ${current} — tap for next`"
                         >
@@ -71,6 +71,7 @@
                                 class="block h-3.5 w-3.5 rounded-full border border-ink-100/50"
                                 :style="`background-color: ${themes.find(t => t.id === current)?.color}`"
                             ></span>
+                            <span class="hidden font-mono text-xs text-ink-500 min-[360px]:inline" x-text="current"></span>
                         </button>
 
                         {{-- sm and up: the full five-dot radiogroup --}}
