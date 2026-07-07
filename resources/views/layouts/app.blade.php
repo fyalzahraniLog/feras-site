@@ -47,6 +47,7 @@
         <footer class="relative z-10 border-t border-ink-800/80">
             <div class="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-6 font-mono text-xs text-ink-500 sm:flex-row sm:items-center sm:justify-between sm:px-6">
                 <p><span class="text-emerald-400">$</span> echo "&copy; {{ date('Y') }} Feras Alzahrani"</p>
+                <a href="mailto:Fyalzahrani@hotmail.com" class="text-cyan-300 transition-colors hover:text-cyan-200">Fyalzahrani@hotmail.com</a>
                 <p class="text-ink-600">built with Laravel + Livewire &middot; exit 0</p>
             </div>
         </footer>
