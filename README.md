@@ -1,58 +1,37 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# feras-site
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+My personal site — a CV that ships. **Live at [feras-site.vercel.app](https://feras-site.vercel.app).**
 
-## About Laravel
+Built with **Laravel 13 + Livewire 4 + Tailwind CSS 4**, and deliberately **database-free**: every post and doc page is a Markdown file in this repo, parsed at request time. The whole site deploys as a single PHP serverless function on Vercel.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## The three sections
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **About Me** (`/`) — the CV as a landing page: projects, experience, education, skills — under a cursor-following black hole that bends the grid background.
+- **Log Dev** (`/log`) — a GitHub-style contribution feed. An AI agent registers my branch work as activity entries: a `project:branch` badge, a one-line title, and an expandable bullet summary it writes from the commits. Live search, tag filters, and `--since=1d/1w/1m` time windows via Livewire.
+- **DOC** (`/docs`) — documentation for my projects, styled like laravel.com/docs: grouped sidebar, "On this page" TOC with scrollspy. Pages are maintained by an agent that fetches the official Laravel/Livewire docs first and only quotes this repo's real code as examples.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## How it works
 
-## Learning Laravel
+- **No database.** [`app/Content/ContentRepository.php`](app/Content/ContentRepository.php) parses Markdown + YAML front matter from `resources/content/{log,docs}` per request (memoized singleton). Sessions are cookie-based; cache is in-memory.
+- **Livewire single-file components.** Each page is one `⚡*.blade.php` file — anonymous PHP class and Blade template together — in `resources/views/components/`, routed with `Route::livewire()`.
+- **The black hole.** The grid background is a `<canvas>` whose lines bend toward a cursor-trailing ball with a softened inverse-square pull, capped below the grid spacing so lines can never cross. Reduced-motion and touch users keep the static CSS grid. See [`resources/js/blackhole.js`](resources/js/blackhole.js).
+- **Serverless PHP on Vercel.** [`api/index.php`](api/index.php) + the community `vercel-php` runtime (PHP 8.5); compiled views and framework caches point at `/tmp`. Deployment config (`vercel.json`) is intentionally gitignored — it carries the production `APP_KEY`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Run it locally
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+composer install
+npm install && npm run build
+cp .env.example .env && php artisan key:generate
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Content is just files — add a post by dropping a `.md` file into `resources/content/log/`. The format contract is documented on the site itself: [/docs/writing-content](https://feras-site.vercel.app/docs/writing-content).
 
-## Contributing
+## Quality bar
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Meaningful changes ship with Pest tests, `pint --dirty` before commits, and an updated [attacksurface.md](attacksurface.md) when exposure changes — conventions in [CLAUDE.md](CLAUDE.md).
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Feras Alzahrani** — [GitHub](https://github.com/fyalzahraniLog) · [LinkedIn](https://www.linkedin.com/in/feras-al-zahrani-04743a2a4) · Fyalzahrani@hotmail.com
