@@ -9,6 +9,10 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        @production
+            <script defer src="/_vercel/insights/script.js"></script>
+        @endproduction
+
         @livewireStyles
     </head>
     <body class="flex min-h-screen flex-col bg-ink-950 font-sans text-ink-200 antialiased">
