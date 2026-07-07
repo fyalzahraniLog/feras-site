@@ -26,6 +26,11 @@
 }
 
 @layer base {
+    /* Alpine: hide x-cloak'd elements until Alpine initializes (coach steps, checkmarks) */
+    [x-cloak] {
+        display: none !important;
+    }
+
     /* Anchored headings land below the sticky 56px header */
     .prose :is(h2, h3) {
         scroll-margin-top: 5rem;

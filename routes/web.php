@@ -9,3 +9,4 @@ Route::livewire('/log/{slug}', 'log-show')->name('log.show');
 
 Route::livewire('/docs', 'docs-index')->name('docs.index');
 Route::livewire('/docs/{slug}', 'docs-show')->name('docs.show');
+Route::livewire('/docs/{slug}/coach', 'docs-coach')->name('docs.coach');

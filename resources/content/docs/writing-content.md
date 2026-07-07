@@ -62,6 +62,35 @@ Body rules for doc pages:
 - **No h1** — the page title renders from front matter.
 - `##` and `###` headings get anchor ids and become the page's "On this page" table of contents, so every `##` should be a meaningful section.
 
+## Coach walkthroughs
+
+Doc pages in the `laravel` and `livewire` categories can have a **feras-coach walkthrough** — a guided, code-first, step-by-step version of the page, rendered at `/docs/{slug}/coach`. Walkthroughs live in `resources/content/coach/` and the **filename must equal the doc slug it coaches** (`coach/routing.md` coaches `/docs/routing`).
+
+```markdown
+---
+title: "Routing with Route::livewire"
+updated: "2026-07-07"
+---
+
+Optional intro (shown with step 1): two sentences on what will exist by the end.
+
+## Register the route
+
+```php
+Route::livewire('/docs/{slug}', 'docs-show')->name('docs.show');
+```
+
+Explanation of what the reader just saw...
+```
+
+Rules the parser and the coach page depend on:
+
+- Every `##` heading is **one step**; text before the first `##` is the intro. No h1.
+- **The first element of every step body is a fenced code block** — the coach page shows the code above its explanation by design.
+- Quote `title` and `updated` in front matter (unquoted YAML dates become integer timestamps).
+- Only `laravel`/`livewire` docs get walkthroughs, and only for doc pages that exist.
+- Reading progress is stored in the reader's own browser (localStorage) — nothing server-side.
+
 ## Conventions
 
 A few habits that keep the section coherent:

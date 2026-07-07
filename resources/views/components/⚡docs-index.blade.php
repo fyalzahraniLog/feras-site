@@ -21,6 +21,16 @@ new #[Title('DOC — Feras')] class extends Component
                 || stripos($doc['excerpt'], $search) !== false)
         );
     }
+
+    /** @return list<string> doc slugs that have a usable walkthrough */
+    #[Computed]
+    public function coachedSlugs(): array
+    {
+        return app(\App\Content\ContentRepository::class)->coaches()
+            ->filter(fn (array $coach) => $coach['steps'] !== [])
+            ->pluck('slug')
+            ->all();
+    }
 };
 ?>
 
@@ -84,7 +94,7 @@ new #[Title('DOC — Feras')] class extends Component
                                 class="group flex flex-col rounded-lg border border-ink-800 bg-ink-900 p-5 transition-colors hover:border-ink-700 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
                             >
                                 <h4 class="font-mono font-semibold text-ink-100 transition-colors group-hover:text-emerald-300">
-                                    {{ $doc['title'] }}
+                                    {{ $doc['title'] }}@if (in_array($doc['slug'], $this->coachedSlugs, true))<x-coach-check :slug="$doc['slug']" />@endif
                                 </h4>
 
                                 <p class="mt-2 flex-1 text-sm text-ink-400">{{ $doc['excerpt'] }}</p>

@@ -28,6 +28,22 @@ new class extends Component
         return app(\App\Content\ContentRepository::class)->groupDocs();
     }
 
+    #[Computed]
+    public function hasCoach(): bool
+    {
+        return app(\App\Content\ContentRepository::class)->hasCoach($this->slug);
+    }
+
+    /** @return list<string> doc slugs that have a usable walkthrough */
+    #[Computed]
+    public function coachedSlugs(): array
+    {
+        return app(\App\Content\ContentRepository::class)->coaches()
+            ->filter(fn (array $coach) => $coach['steps'] !== [])
+            ->pluck('slug')
+            ->all();
+    }
+
     public function rendering($view): void
     {
         $view->title($this->doc['title'].' — DOC — Feras');
@@ -59,7 +75,7 @@ new class extends Component
                                             'border-transparent text-ink-400 hover:text-ink-100' => $doc['slug'] !== $slug,
                                         ])
                                     >
-                                        {{ $doc['title'] }}
+                                        {{ $doc['title'] }}@if (in_array($doc['slug'], $this->coachedSlugs, true))<x-coach-check :slug="$doc['slug']" />@endif
                                     </a>
                                 </li>
                             @endforeach
@@ -88,7 +104,7 @@ new class extends Component
                                             'border-transparent text-ink-400 hover:text-ink-100' => $doc['slug'] !== $slug,
                                         ])
                                     >
-                                        {{ $doc['title'] }}
+                                        {{ $doc['title'] }}@if (in_array($doc['slug'], $this->coachedSlugs, true))<x-coach-check :slug="$doc['slug']" />@endif
                                     </a>
                                 </li>
                             @endforeach
@@ -115,6 +131,17 @@ new class extends Component
             <p class="font-mono text-xs text-ink-500">
                 updated {{ $this->doc['updated']->format('Y-m-d') }}
             </p>
+
+            @if ($this->hasCoach)
+                <a
+                    href="{{ route('docs.coach', $slug) }}"
+                    wire:navigate
+                    class="inline-flex items-center gap-2 rounded border border-emerald-400/40 bg-emerald-400/10 px-3 py-1.5 font-mono text-xs text-emerald-300 transition-colors hover:bg-emerald-400/20 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                >
+                    $ feras-coach --learn
+                    <span class="text-ink-500">// build it step by step</span>
+                </a>
+            @endif
         </header>
 
         <div class="mt-8">

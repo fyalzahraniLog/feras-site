@@ -28,8 +28,10 @@ class ContentRepository
     /** Fixed sidebar/index group order; unknown categories sort last. */
     public const CATEGORY_ORDER = ['laravel', 'livewire', 'site'];
 
-    public function __construct()
+    public function __construct(protected ?string $contentPath = null)
     {
+        $this->contentPath ??= resource_path('content');
+
         $environment = new Environment([
             // ids on h2/h3 for the "On this page" TOC — no visible anchor element.
             'heading_permalink' => [
@@ -40,10 +42,10 @@ class ContentRepository
                 'max_heading_level' => 3,
             ],
         ]);
-        $environment->addExtension(new CommonMarkCoreExtension());
-        $environment->addExtension(new GithubFlavoredMarkdownExtension());
-        $environment->addExtension(new FrontMatterExtension());
-        $environment->addExtension(new HeadingPermalinkExtension());
+        $environment->addExtension(new CommonMarkCoreExtension);
+        $environment->addExtension(new GithubFlavoredMarkdownExtension);
+        $environment->addExtension(new FrontMatterExtension);
+        $environment->addExtension(new HeadingPermalinkExtension);
 
         $this->converter = new MarkdownConverter($environment);
     }
@@ -55,7 +57,7 @@ class ContentRepository
      */
     public function posts(): Collection
     {
-        return $this->parseDirectory(resource_path('content/log'))
+        return $this->parseDirectory($this->contentPath.'/log')
             ->map(fn (array $entry) => $this->hydratePost($entry))
             ->sortByDesc('date')
             ->values();
@@ -73,7 +75,7 @@ class ContentRepository
      */
     public function docs(): Collection
     {
-        return $this->parseDirectory(resource_path('content/docs'))
+        return $this->parseDirectory($this->contentPath.'/docs')
             ->map(fn (array $entry) => $this->hydrateDoc($entry))
             ->sortBy([['order', 'asc'], ['title', 'asc']])
             ->values();
@@ -82,6 +84,31 @@ class ContentRepository
     public function doc(string $slug): ?array
     {
         return $this->docs()->firstWhere('slug', $slug);
+    }
+
+    /**
+     * All feras-coach walkthroughs, keyed by the doc slug they coach.
+     *
+     * @return Collection<int, array<string, mixed>>
+     */
+    public function coaches(): Collection
+    {
+        return $this->parseDirectory($this->contentPath.'/coach')
+            ->map(fn (array $entry) => $this->hydrateCoach($entry))
+            ->values();
+    }
+
+    public function coach(string $slug): ?array
+    {
+        return $this->coaches()->firstWhere('slug', $slug);
+    }
+
+    /** True only for a usable walkthrough: file exists AND has at least one step. */
+    public function hasCoach(string $slug): bool
+    {
+        $coach = $this->coach($slug);
+
+        return $coach !== null && $coach['steps'] !== [];
     }
 
     /**
@@ -175,6 +202,46 @@ class ContentRepository
             'headings' => $this->extractHeadings($entry['html']),
             'html' => $entry['html'],
         ];
+    }
+
+    protected function hydrateCoach(array $entry): array
+    {
+        $matter = $entry['matter'];
+        $slug = $matter['slug'] ?? $entry['filename'];
+        [$intro, $steps] = $this->splitSteps($entry['html']);
+
+        return [
+            'slug' => $slug,
+            'title' => $matter['title'] ?? Str::headline($slug),
+            'updated' => $this->parseDate($matter['updated'] ?? null) ?? $entry['modified'],
+            'intro' => $intro,
+            'steps' => $steps,
+        ];
+    }
+
+    /**
+     * Split rendered HTML into [intro, steps] on <h2> boundaries. A '##' inside
+     * a fenced code block is already escaped inside <pre> — never a false split.
+     *
+     * @return array{0: string, 1: list<array{title: string, html: string}>}
+     */
+    protected function splitSteps(string $html): array
+    {
+        $parts = preg_split('/(?=<h2\b)/', $html);
+        $intro = trim(array_shift($parts) ?? '');
+
+        $steps = [];
+        foreach ($parts as $chunk) {
+            if (! preg_match('/^<h2[^>]*>(.*?)<\/h2>/s', $chunk, $m)) {
+                continue;
+            }
+            $steps[] = [
+                'title' => trim(html_entity_decode(strip_tags($m[1]))),
+                'html' => trim(substr($chunk, strlen($m[0]))),
+            ];
+        }
+
+        return [$intro, $steps];
     }
 
     /**
