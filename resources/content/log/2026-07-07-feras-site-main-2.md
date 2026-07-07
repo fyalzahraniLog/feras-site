@@ -5,7 +5,7 @@ date: "2026-07-07T10:30:35+03:00"
 project: feras-site
 branch: main
 repo: https://github.com/fyalzahraniLog/feras-site
-commit: 23123c8
+commit: 5603110
 slug: 2026-07-07-feras-site-main-2
 tags: [feras-site, livewire, analytics]
 ---
