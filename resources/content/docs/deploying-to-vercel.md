@@ -53,11 +53,9 @@ That was **trap #3**: without it, every stylesheet and script pointed at `http:/
 
 ## Secrets and deploying
 
-`vercel.json` also carries the production environment, including `APP_KEY` — which is why **that file is gitignored** and absent from the public repository. Deploys are one command from the project root:
+The production environment — including `APP_KEY` — lives in **Vercel's encrypted environment-variable store** (project → Settings → Environment Variables), never in the repository. That keeps `vercel.json` free of secrets, so it's committed like any other config file.
 
-```bash
-vercel deploy --prod
-```
+Deploys are automatic: the project is connected to the GitHub repository, and every push to `main` builds and ships in under a minute. Publishing a post is just committing a Markdown file and pushing — no deploy commands. (`vercel deploy --prod` still works for manual deploys when needed.)
 
 There is no build server dependency beyond `npm run build` (Vite assets) — no database migrations, no queue workers, nothing to reload.
 

@@ -10,7 +10,7 @@ Last updated: 2026-07-07 (initial entry, at first public deployment)
 - **Data:** none. No database, no user data stored. Content is read-only Markdown bundled with the deployment. Sessions are cookie-driver (encrypted client-side cookies), cache is in-memory array.
 - **User input paths:** Livewire component properties only — search strings and filter values on `/log` and `/docs` (compared server-side with `stripos`, echoed back through Blade `{{ }}` escaping), and route slugs (looked up against the content collection; unknown → 404). Livewire payloads are checksum-signed with `APP_KEY`.
 - **Rendered HTML risk:** `{!! !!}` is used only for CommonMark output of repo-bundled Markdown files — trusted authorship (me/agents via reviewed commits), not user-submitted. [VERIFIED in x-prose component]
-- **Secrets:** `APP_KEY` lives in `vercel.json`, which is **gitignored** — it must never be committed (this repo is public-facing). Location only; value not recorded here. Rotating it invalidates nothing but session cookies.
+- **Secrets:** `APP_KEY` lives in Vercel's encrypted environment-variable store (Production env). [VERIFIED 2026-07-07] `vercel.json` carries no secrets and is committed. Location only; value not recorded here. Rotating it invalidates nothing but session cookies.
 - **Headers observed:** HSTS (preload) via Vercel; cookies `secure; httponly; samesite=lax`. [VERIFIED 2026-07-07]
 - **Deploy path:** local `vercel deploy --prod` via CLI under the fyalzahranilogs-projects team. No git integration yet (repo has no remote).
 - **Known accepted risks:** `x-powered-by: PHP/8.5.2` header disclosure (cosmetic); Laravel/Livewire route surface (`/livewire-*/update` POST endpoint — standard framework surface, checksummed).
