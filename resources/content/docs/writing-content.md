@@ -51,10 +51,16 @@ Three rules the agent follows (and you should too, if writing one by hand): quot
 
 Docs live in `resources/content/docs/` and are grouped rather than dated. Front matter drives the index:
 
-- `title` — page heading and link text.
-- `category` — the `#`-labeled group on the index and in the sidebar.
-- `order` — sort position within all docs (ties broken by title).
-- `excerpt` — one line shown on the index card; keep it under ~140 characters.
+- `title` — page heading and link text (quote it).
+- `category` — the `#`-labeled group on the index and in the sidebar. Current groups, in fixed sidebar order: `laravel`, `livewire`, `site` (the order lives in `ContentRepository::CATEGORY_ORDER`; unknown categories sort last).
+- `order` — sort position within the category (ties broken by title).
+- `excerpt` — one line shown on the index card; keep it under ~140 characters (quote it).
+- `updated` — quoted `"YYYY-MM-DD"`. Quote every date in front matter: unquoted YAML dates are coerced to integer timestamps by the parser.
+
+Body rules for doc pages:
+
+- **No h1** — the page title renders from front matter.
+- `##` and `###` headings get anchor ids and become the page's "On this page" table of contents, so every `##` should be a meaningful section.
 
 ## Conventions
 
