@@ -75,9 +75,9 @@ new #[Title('Feras Alzahrani — Full-Stack Developer')] class extends Component
     <section id="about" class="space-y-8">
         <x-section-heading prefix="//">about-me</x-section-heading>
 
-        <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-8">
             {{-- Bio --}}
-            <div class="space-y-4 text-ink-300 lg:col-span-2">
+            <div class="max-w-3xl space-y-4 text-ink-300">
                 <p>
                     I'm a Computer Science graduate from Umm Al-Qura University and a full-stack
                     developer working with the RILT stack &mdash; React, Inertia, Laravel, and
@@ -97,34 +97,6 @@ new #[Title('Feras Alzahrani — Full-Stack Developer')] class extends Component
                 </p>
             </div>
 
-            {{-- Quick facts card --}}
-            <div class="rounded-lg border border-ink-800 bg-ink-900 p-5">
-                <p class="mb-4 font-mono text-xs text-ink-500">$ cat facts.yml</p>
-                <dl class="space-y-3 font-mono text-sm">
-                    <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">location:</dt>
-                        <dd class="text-right text-ink-200">Saudi Arabia</dd>
-                    </div>
-                    <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">focus:</dt>
-                        <dd class="text-right text-ink-200">full-stack (RILT)</dd>
-                    </div>
-                    <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">degree:</dt>
-                        <dd class="text-right text-ink-200">B.Sc. CS &mdash; UQU</dd>
-                    </div>
-                    <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">languages:</dt>
-                        <dd class="text-right text-ink-200">ar (native) / en</dd>
-                    </div>
-                    <div class="flex justify-between gap-4">
-                        <dt class="text-ink-500">email:</dt>
-                        <dd class="text-right">
-                            <a href="mailto:Fyalzahrani@hotmail.com" class="text-cyan-300 hover:underline">Fyalzahrani@hotmail.com</a>
-                        </dd>
-                    </div>
-                </dl>
-            </div>
         </div>
     </section>
 
@@ -459,7 +431,6 @@ new #[Title('Feras Alzahrani — Full-Stack Developer')] class extends Component
            class="mt-4 inline-block font-mono text-lg text-cyan-300 transition-colors hover:text-cyan-200 sm:text-xl">
             Fyalzahrani@hotmail.com
         </a>
-        <p class="mt-2 font-mono text-sm text-ink-400">[removed]</p>
         <div class="mt-6 flex items-center justify-center gap-6 font-mono text-sm">
             <a href="https://github.com/fyalzahraniLog" target="_blank" rel="noopener" class="text-ink-400 transition-colors hover:text-emerald-400">github</a>
             <span class="text-ink-700">/</span>
