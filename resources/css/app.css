@@ -83,6 +83,52 @@
     --livewire-progress-bar-color: #f472b6;
 }
 
+:root[data-theme='ocean'] {
+    --color-ink-50: #f0f6fb;
+    --color-ink-100: #e2ecf5;
+    --color-ink-200: #c2d3e3;
+    --color-ink-300: #9fb8d0;
+    --color-ink-400: #7d9cba;
+    --color-ink-500: #5d83a8;
+    --color-ink-600: #3d6187;
+    --color-ink-700: #2b4763;
+    --color-ink-800: #1a2c40;
+    --color-ink-850: #111e2c;
+    --color-ink-900: #0d1722;
+    --color-ink-950: #081018;
+    --color-emerald-300: #7dd3fc;
+    --color-emerald-400: #38bdf8;
+    --color-emerald-500: #0ea5e9;
+    --color-cyan-200: #99f6e4;
+    --color-cyan-300: #5eead4;
+    --grid-line: rgba(43, 71, 99, 0.3);
+    --bh-accent: 56, 189, 248;
+    --livewire-progress-bar-color: #38bdf8;
+}
+
+:root[data-theme='crimson'] {
+    --color-ink-50: #faf0f0;
+    --color-ink-100: #f0e0e0;
+    --color-ink-200: #ddc2c2;
+    --color-ink-300: #c9a1a1;
+    --color-ink-400: #b08181;
+    --color-ink-500: #966262;
+    --color-ink-600: #714444;
+    --color-ink-700: #523030;
+    --color-ink-800: #331d1d;
+    --color-ink-850: #241515;
+    --color-ink-900: #1d1010;
+    --color-ink-950: #140b0b;
+    --color-emerald-300: #fca5a5;
+    --color-emerald-400: #f87171;
+    --color-emerald-500: #ef4444;
+    --color-cyan-200: #fecdd3;
+    --color-cyan-300: #fda4af;
+    --grid-line: rgba(82, 48, 48, 0.28);
+    --bh-accent: 248, 113, 113;
+    --livewire-progress-bar-color: #f87171;
+}
+
 @layer base {
     /* Alpine: hide x-cloak'd elements until Alpine initializes (coach steps, checkmarks) */
     [x-cloak] {

@@ -45,6 +45,8 @@
                                 { id: 'ink', color: '#34d399', label: 'ink — emerald on blue-black' },
                                 { id: 'ember', color: '#fbbf24', label: 'ember — amber on warm charcoal' },
                                 { id: 'nebula', color: '#f472b6', label: 'nebula — pink on deep purple' },
+                                { id: 'ocean', color: '#38bdf8', label: 'ocean — sky on deep navy' },
+                                { id: 'crimson', color: '#f87171', label: 'crimson — red on dark maroon' },
                             ],
                             current: document.documentElement.dataset.theme || 'ink',
                             set(id) {
@@ -56,7 +58,7 @@
                                 window.__blackhole?.destroy(); window.__blackhole?.init();
                             },
                         }"
-                        class="mr-2 flex items-center gap-1.5"
+                        class="mr-2 flex items-center gap-1 sm:gap-1.5"
                         role="radiogroup"
                         aria-label="Color theme"
                     >
@@ -69,7 +71,7 @@
                                 :aria-checked="(current === t.id).toString()"
                                 :class="current === t.id ? 'scale-110 border-ink-100/70' : 'border-transparent opacity-60 hover:opacity-100'"
                                 :style="`background-color: ${t.color}`"
-                                class="h-3 w-3 rounded-full border transition hover:scale-125 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                                class="h-2.5 w-2.5 rounded-full border transition hover:scale-125 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 sm:h-3 sm:w-3"
                             ></button>
                         </template>
                     </div>

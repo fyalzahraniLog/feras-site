@@ -2,11 +2,11 @@
 title: "Theming with CSS Variables"
 category: laravel
 order: 5
-excerpt: "How three complete dark themes remap the whole design system through Tailwind 4 variables — without touching a single template."
+excerpt: "How five complete dark themes remap the whole design system through Tailwind 4 variables — without touching a single template."
 updated: "2026-07-07"
 ---
 
-This site ships three dark themes — **ink**, **ember**, and **nebula** — switched from the header dots. The remarkable part is what the implementation *didn't* require: no template changes, no duplicate stylesheets, no theme-aware components. The whole mechanism is a property of how Tailwind 4 works.
+This site ships five dark themes — **ink**, **ember**, **nebula**, **ocean**, and **crimson** — switched from the header dots. The remarkable part is what the implementation *didn't* require: no template changes, no duplicate stylesheets, no theme-aware components. The whole mechanism is a property of how Tailwind 4 works, and adding a theme is ~20 lines of CSS variables plus one entry in the switcher's list.
 
 ## Utilities are variables underneath
 
