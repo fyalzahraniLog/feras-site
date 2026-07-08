@@ -71,7 +71,7 @@ Body: first-person study notes. No h1; `##` sections structure the entry.
 
 Field rules:
 
-- `track` — which study track the entry belongs to: `ibm-genai`, `security-plus`, or `labs`. Required for every real entry (the valid set lives in `ContentRepository::STUDY_TRACKS` and is enforced by a seed-integrity test); it drives the `--track=` filter chips on the index.
+- `track` — which study track the entry belongs to: `ibm-genai`, `security-plus`, `dotnet`, or `labs`. Required for every real entry (the valid set lives in `ContentRepository::STUDY_TRACKS` and is enforced by a seed-integrity test); it drives the `--track=` filter chips on the index.
 - `module` — optional free-text position in a course (e.g. `"Course 1 · Module 2"`).
 - `artifact` — optional `https://` link to what the module produced (repo, script, write-up). Course-module entries should have one: the section's standing rule is that a module without an artifact isn't done.
 - `date` — quoted, always (unquoted YAML dates are coerced to integer timestamps).

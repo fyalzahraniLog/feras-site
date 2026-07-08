@@ -29,7 +29,7 @@ class ContentRepository
     public const CATEGORY_ORDER = ['laravel', 'livewire', 'site'];
 
     /** The study tracks entries may belong to — also the filter-chip order on /study. */
-    public const STUDY_TRACKS = ['ibm-genai', 'security-plus', 'labs'];
+    public const STUDY_TRACKS = ['ibm-genai', 'security-plus', 'dotnet', 'labs'];
 
     public function __construct(protected ?string $contentPath = null)
     {
