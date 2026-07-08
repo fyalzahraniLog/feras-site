@@ -1,5 +1,6 @@
 <?php
 
+use App\Content\ContentRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -44,7 +45,8 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/** A ContentRepository reading from the test fixtures instead of resources/content. */
+function fixtureRepository(): ContentRepository
 {
-    // ..
+    return new ContentRepository(base_path('tests/Fixtures/content'));
 }

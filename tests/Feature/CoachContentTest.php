@@ -2,11 +2,6 @@
 
 use App\Content\ContentRepository;
 
-function fixtureRepository(): ContentRepository
-{
-    return new ContentRepository(base_path('tests/Fixtures/content'));
-}
-
 it('splits a walkthrough into intro and steps on h2 boundaries', function () {
     $coach = fixtureRepository()->coach('stepped');
 

@@ -16,7 +16,7 @@ use League\CommonMark\MarkdownConverter;
 
 /**
  * File-based content store: Markdown files with YAML front matter,
- * living in resources/content/{log,docs}. No database required.
+ * living in resources/content/{log,docs,coach,study}. No database required.
  */
 class ContentRepository
 {
@@ -27,6 +27,9 @@ class ContentRepository
 
     /** Fixed sidebar/index group order; unknown categories sort last. */
     public const CATEGORY_ORDER = ['laravel', 'livewire', 'site'];
+
+    /** The study tracks entries may belong to — also the filter-chip order on /study. */
+    public const STUDY_TRACKS = ['ibm-genai', 'security-plus', 'labs'];
 
     public function __construct(protected ?string $contentPath = null)
     {
@@ -117,6 +120,24 @@ class ContentRepository
     }
 
     /**
+     * All study-journey entries, newest first.
+     *
+     * @return Collection<int, array<string, mixed>>
+     */
+    public function studyEntries(): Collection
+    {
+        return $this->parseDirectory($this->contentPath.'/study')
+            ->map(fn (array $entry) => $this->hydrateStudyEntry($entry))
+            ->sortByDesc('date')
+            ->values();
+    }
+
+    public function studyEntry(string $slug): ?array
+    {
+        return $this->studyEntries()->firstWhere('slug', $slug);
+    }
+
+    /**
      * Group docs by category in the fixed CATEGORY_ORDER.
      * Pass a pre-filtered collection (e.g. search results) or nothing for all docs.
      */
@@ -172,6 +193,26 @@ class ContentRepository
             'branch' => $matter['branch'] ?? null,
             'repo' => $matter['repo'] ?? null,
             'commit' => $matter['commit'] ?? null,
+            'title' => $matter['title'] ?? Str::headline($slug),
+            'date' => $this->parseDate($matter['date'] ?? null) ?? $entry['modified'],
+            'tags' => $matter['tags'] ?? [],
+            'excerpt' => $matter['excerpt'] ?? Str::limit($plain, 160),
+            'readingTime' => max(1, (int) ceil(str_word_count($plain) / 200)),
+            'html' => $entry['html'],
+        ];
+    }
+
+    protected function hydrateStudyEntry(array $entry): array
+    {
+        $matter = $entry['matter'];
+        $slug = $matter['slug'] ?? preg_replace('/^\d{4}-\d{2}-\d{2}-/', '', $entry['filename']);
+        $plain = trim(strip_tags($entry['html']));
+
+        return [
+            'slug' => $slug,
+            'track' => $matter['track'] ?? null,
+            'module' => $matter['module'] ?? null,
+            'artifact' => $matter['artifact'] ?? null,
             'title' => $matter['title'] ?? Str::headline($slug),
             'date' => $this->parseDate($matter['date'] ?? null) ?? $entry['modified'],
             'tags' => $matter['tags'] ?? [],

@@ -93,6 +93,7 @@
 
                     <a href="{{ route('home') }}" class="{{ $navLink(request()->routeIs('home')) }}">./about</a>
                     <a href="{{ route('log.index') }}" class="{{ $navLink(request()->routeIs('log.*')) }}">./log-dev</a>
+                    <a href="{{ route('study.index') }}" class="{{ $navLink(request()->routeIs('study.*')) }}">./study</a>
                     <a href="{{ route('docs.index') }}" class="{{ $navLink(request()->routeIs('docs.*')) }}">./doc</a>
                 </div>
             </nav>

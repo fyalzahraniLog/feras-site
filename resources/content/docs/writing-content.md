@@ -47,6 +47,36 @@ tags: [pchome]
 
 Three rules the agent follows (and you should too, if writing one by hand): quote the `date` (unquoted YAML datetimes become integer timestamps), keep the date prefix in the explicit `slug` (prevents collisions when the same branch is registered on different days), and record the HEAD `commit` — it's how the agent knows where the next summary should start.
 
+## Study entries
+
+The `/study` section is a public study log — courses, certifications, and labs
+written up first-person, each linking the artifact it produced. Entries live in
+`resources/content/study/` with the same dated-filename convention as dev-log
+posts (`2026-07-08-what-im-studying-and-why.md` appears at
+`/study/what-im-studying-and-why`):
+
+```markdown
+---
+title: "RAG Basics, in My Own Words"
+date: "2026-07-08T12:00:00+03:00"
+track: ibm-genai
+module: "Course 1 · Module 2"
+artifact: "https://github.com/user/rag-notes"
+tags: [rag, llm]
+excerpt: "One line for the index card."
+---
+
+Body: first-person study notes. No h1; `##` sections structure the entry.
+```
+
+Field rules:
+
+- `track` — which study track the entry belongs to: `ibm-genai`, `security-plus`, or `labs`. Required for every real entry (the valid set lives in `ContentRepository::STUDY_TRACKS` and is enforced by a seed-integrity test); it drives the `--track=` filter chips on the index.
+- `module` — optional free-text position in a course (e.g. `"Course 1 · Module 2"`).
+- `artifact` — optional `https://` link to what the module produced (repo, script, write-up). Course-module entries should have one: the section's standing rule is that a module without an artifact isn't done.
+- `date` — quoted, always (unquoted YAML dates are coerced to integer timestamps).
+- `tags` and `excerpt` behave exactly as on dev-log posts.
+
 ## Doc pages
 
 Docs live in `resources/content/docs/` and are grouped rather than dated. Front matter drives the index:
