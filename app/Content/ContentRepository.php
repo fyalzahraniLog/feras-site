@@ -33,6 +33,11 @@ class ContentRepository
         $this->contentPath ??= resource_path('content');
 
         $environment = new Environment([
+            // Defense in depth: content is repo-authored (trusted), but agents write
+            // most of it — raw HTML and javascript:/data: links must never reach
+            // the {!! !!} sink in x-prose. Fenced code blocks are unaffected.
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
             // ids on h2/h3 for the "On this page" TOC — no visible anchor element.
             'heading_permalink' => [
                 'insert' => 'none',
